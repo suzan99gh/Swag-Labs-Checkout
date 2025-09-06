@@ -23,9 +23,20 @@ namespace SwagLabs.TestMethods
         [TestMethod]
         public void Login()
         {
-            //Login_AssistantMethods login_Assistant = new Login_AssistantMethods();
-            //login_Assistant.UserLogin();
-            Login_AssistantMethods.UserLogin();
+            try
+            {
+                Login_AssistantMethods.UserLogin();
+                var expectedURL = "https://www.saucedemo.com/v1/inventory.html";
+                var actualUrl = ManageDriver.driver.Url;
+                Assert.AreEqual(expectedURL, actualUrl);
+                Console.WriteLine("TC1 Completed Successfully.");
+
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
 
         }
     }
