@@ -6,13 +6,16 @@ using System.Threading.Tasks;
 using Efwatercom.AssistantMethods;
 using Efwatercom.Data;
 using SwagLabs.Helpers;
+using AventStack.ExtentReports;
+using AventStack.ExtentReports.Reporter;
+using AventStack.ExtentReports.Model;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace SwagLabs.TestMethods
 {
     [TestClass]
     public class Login_TestMethode
     {
-        [ClassInitialize]
         public static void ClassInitialize(TestContext testContext)
         {
             CommonMethods.NavigateToURL(GlobalConstant.LoginLink);
@@ -20,9 +23,18 @@ namespace SwagLabs.TestMethods
 
         }
 
+        [ClassCleanup]
+        public static void ClassCleanup()
+        {
+            ManageDriver.CloseDriver();
+
+        }
+
         [TestMethod]
         public void Login()
         {
+
+            
             try
             {
                 Login_AssistantMethods.UserLogin();
@@ -30,7 +42,8 @@ namespace SwagLabs.TestMethods
                 var actualUrl = ManageDriver.driver.Url;
                 Assert.AreEqual(expectedURL, actualUrl);
                 Console.WriteLine("TC1 Completed Successfully.");
-
+                string screenshotPath = CommonMethods.TakeScreenShot();
+                Console.WriteLine($"Screenshot saved at: {screenshotPath}");
 
             }
             catch (Exception ex)

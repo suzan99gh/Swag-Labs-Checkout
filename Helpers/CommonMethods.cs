@@ -28,12 +28,13 @@ namespace SwagLabs.Helpers
         {
             ITakesScreenshot takesScreenshot = (ITakesScreenshot)ManageDriver.driver;
             Screenshot screenshot = takesScreenshot.GetScreenshot();
-            string path = "C:\\Users\\b.alhassoun.ext\\source\\repos\\HerfaTest-Batch 6\\HerfaTest-Batch 6\\Data\\Images";
+            string path = "C:\\Users\\moalgharX\\source\\repos\\SwagLabs\\Data\\Images\\";
             string imageName = Guid.NewGuid().ToString() + "_image.png"; // 2145625-2722-2872-2729-268682372139_image.png
             string fullPath = Path.Combine(path + $"\\{imageName}");// "C:\\Users\\b.alhassoun.ext\\source\\repos\\HerfaTest-Batch 6\\HerfaTest-Batch 6\\Data\\Images\\2145625-2722-2872-2729-268682372139_image.png
             screenshot.SaveAsFile(fullPath);
             return fullPath;
         }
+
 
 
         public static IWebElement WaitAndFindElement(By by)//By.XPath("//div/input[@id='Fname']");
