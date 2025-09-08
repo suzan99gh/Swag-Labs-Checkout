@@ -10,6 +10,7 @@ using AventStack.ExtentReports;
 using AventStack.ExtentReports.Reporter;
 using AventStack.ExtentReports.Model;
 using static System.Net.Mime.MediaTypeNames;
+using SwagLabs.AssistantMethods;
 
 namespace SwagLabs.TestMethods
 {
@@ -23,18 +24,18 @@ namespace SwagLabs.TestMethods
 
         }
 
-        [ClassCleanup]
-        public static void ClassCleanup()
-        {
-            ManageDriver.CloseDriver();
+        //[ClassCleanup]
+        //public static void ClassCleanup()
+        //{
+        //    ManageDriver.CloseDriver();
 
-        }
+        //}
 
         [TestMethod]
         public void Login()
         {
 
-            
+
             try
             {
                 Login_AssistantMethods.UserLogin();
@@ -44,6 +45,8 @@ namespace SwagLabs.TestMethods
                 Console.WriteLine("TC1 Completed Successfully.");
                 string screenshotPath = CommonMethods.TakeScreenShot();
                 Console.WriteLine($"Screenshot saved at: {screenshotPath}");
+                //Products_AssistantMethods.AddToCart();
+
 
             }
             catch (Exception ex)
@@ -52,5 +55,6 @@ namespace SwagLabs.TestMethods
             }
 
         }
+
     }
 }
