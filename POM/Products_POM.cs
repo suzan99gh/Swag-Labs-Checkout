@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium;
 using SwagLabs.Helpers;
+using OpenQA.Selenium.DevTools.V137.DOM;
+using OpenQA.Selenium.Support.UI;
 
 namespace SwagLabs.POM
 {
@@ -15,27 +18,63 @@ namespace SwagLabs.POM
         {
             webDriver = driver; // _webDriver = new chromeDriver()
         }
-        By productCard = By.XPath("//div[@class='inventory_item']");
-        By addToCartBtn = By.XPath(".//button[contains(text(), 'Add to cart')]");
+        By productCard = By.XPath("(//div[@class='inventory_item'])");
+        By addToCartBtn = By.XPath("//button[@class='btn_primary btn_inventory']");
+        By cartNum = By.XPath("//a/span[@class='fa-layers-counter shopping_cart_badge']");
+        //public void ClickRandomProduct()
+        //{
+        //    IList<IWebElement> products = webDriver.FindElements(addToCartBtn);
+        //    int numberOfItems = products.Count;
+        //    //if (numberOfItems == 0)
+        //    //{
+        //    //    throw new Exception("No products found.");
+        //    //}
+        //    Random rand = new Random();
+        //    int randomIndex = rand.Next(0, numberOfItems);
+        //    Console.WriteLine($"Clicked random item at index: {randomIndex}");
+        //    IWebElement chosenProductroduct = products[randomIndex];
+        //    chosenProductroduct.Click();
+        //    CommonMethods.Highlightelement(chosenProductroduct);
+
+        //}
 
         public void ClickRandomProduct()
         {
-            IList<IWebElement> products = webDriver.FindElements(productCard);
-            int numberOfItems = products.Count;
-            if (numberOfItems == 0)
+            WebDriverWait wait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(10));
+
+            IList<IWebElement> products = wait.Until(d =>
             {
-                throw new Exception("No products found.");
-            }
+                var elems = d.FindElements(addToCartBtn);
+                return elems.Count > 0 ? elems : null;
+            });
+
+            int numberOfItems = products.Count;
+            Console.WriteLine($"Number of products found: {numberOfItems}");
+
             Random rand = new Random();
             int randomIndex = rand.Next(0, numberOfItems);
             Console.WriteLine($"Clicked random item at index: {randomIndex}");
 
-            IWebElement button = products[randomIndex].FindElement(addToCartBtn);
-            CommonMethods.Highlightelement(button);
-            button.Click();
-
+            IWebElement chosenProduct = products[randomIndex];
+            chosenProduct.Click();
+            CommonMethods.Highlightelement(chosenProduct);
         }
 
 
+
+        public void ScrollUp ()
+        { 
+            Thread.Sleep(1000);
+            IJavaScriptExecutor js = (IJavaScriptExecutor)webDriver;
+            js.ExecuteScript("window.scrollTo(0, 0);");
+        }
+        public string CheckCartNumber()
+        {
+           
+            IWebElement number = webDriver.FindElement(cartNum);
+            string value = number.Text;
+            Console.WriteLine(value);
+            return(value);
+        }
     }
 }

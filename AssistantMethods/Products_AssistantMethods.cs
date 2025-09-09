@@ -14,7 +14,7 @@ namespace SwagLabs.AssistantMethods
         {
             Products_POM products_POM = new Products_POM(ManageDriver.driver);
             products_POM.ClickRandomProduct();
-             Thread.Sleep(1000);
+             Thread.Sleep(2000);
             products_POM.ClickRandomProduct();
 
         }
