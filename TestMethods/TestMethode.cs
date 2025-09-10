@@ -28,10 +28,9 @@ namespace SwagLabs.TestMethods
         //}
 
         [TestMethod]
+        [Priority(1)]
         public void Login()
         {
-
-
             try
             {
                 CommonMethods.NavigateToURL(GlobalConstant.LoginLink);
@@ -44,8 +43,6 @@ namespace SwagLabs.TestMethods
                 //string screenshotPath = CommonMethods.TakeScreenShot();
                 //Console.WriteLine($"Screenshot saved at: {screenshotPath}");
                 Products_AssistantMethods.AddToCart();
-
-
             }
             catch (Exception ex)
             {
@@ -54,10 +51,10 @@ namespace SwagLabs.TestMethods
         }
 
         [TestMethod]
+        [Priority(2)]
         public void AddProduct()
         {
             Products_POM products_POM = new Products_POM(ManageDriver.driver);
-
             try
             {
                 Products_AssistantMethods.AddToCart();
@@ -72,6 +69,26 @@ namespace SwagLabs.TestMethods
             { 
                 Console.WriteLine(ex.Message); 
             }  
+        }
+
+        [TestMethod]
+        [Priority(3)]
+        public void Checkout()
+        {
+            CheckOut_POM checkOut_POM = new CheckOut_POM(ManageDriver.driver);
+            try
+            {
+                Chechout_AssistantMethods.CheckOutProccess();
+                string massege = checkOut_POM.CheckProccessCompleted();
+                Console.WriteLine("Actual Massege " + massege);
+                Assert.AreEqual("Checkout: Overview", massege);
+                Console.WriteLine("Add two product test Completed Successfully.");
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
     }
 }
