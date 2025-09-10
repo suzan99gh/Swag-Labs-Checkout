@@ -14,29 +14,13 @@ namespace SwagLabs.POM
     public class Products_POM
     {
         public IWebDriver webDriver;
-        public Products_POM(IWebDriver driver) // IwebDriver driver = new chromeDriver()
+        public Products_POM(IWebDriver driver)
         {
-            webDriver = driver; // _webDriver = new chromeDriver()
+            webDriver = driver; 
         }
         By productCard = By.XPath("(//div[@class='inventory_item'])");
         By addToCartBtn = By.XPath("//button[@class='btn_primary btn_inventory']");
         By cartNum = By.XPath("//a/span[@class='fa-layers-counter shopping_cart_badge']");
-        //public void ClickRandomProduct()
-        //{
-        //    IList<IWebElement> products = webDriver.FindElements(addToCartBtn);
-        //    int numberOfItems = products.Count;
-        //    //if (numberOfItems == 0)
-        //    //{
-        //    //    throw new Exception("No products found.");
-        //    //}
-        //    Random rand = new Random();
-        //    int randomIndex = rand.Next(0, numberOfItems);
-        //    Console.WriteLine($"Clicked random item at index: {randomIndex}");
-        //    IWebElement chosenProductroduct = products[randomIndex];
-        //    chosenProductroduct.Click();
-        //    CommonMethods.Highlightelement(chosenProductroduct);
-
-        //}
 
         public void ClickRandomProduct()
         {
@@ -71,7 +55,7 @@ namespace SwagLabs.POM
         public string CheckCartNumber()
         {
            
-            IWebElement number = webDriver.FindElement(cartNum);
+            IWebElement number = CommonMethods.WaitAndFindElement(cartNum);
             string value = number.Text;
             Console.WriteLine(value);
             return(value);

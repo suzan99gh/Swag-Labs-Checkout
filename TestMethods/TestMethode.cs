@@ -18,14 +18,6 @@ namespace SwagLabs.TestMethods
     [TestClass]
     public class TestMethode
     {
-      
-
-        //[ClassCleanup]
-        //public static void ClassCleanup()
-        //{
-        //    ManageDriver.CloseDriver();
-
-        //}
 
         [TestMethod]
         [Priority(1)]
@@ -40,13 +32,13 @@ namespace SwagLabs.TestMethods
                 var actualUrl = ManageDriver.driver.Url;
                 Assert.AreEqual(expectedURL, actualUrl);
                 Console.WriteLine("Login test Completed Successfully.");
-                //string screenshotPath = CommonMethods.TakeScreenShot();
-                //Console.WriteLine($"Screenshot saved at: {screenshotPath}");
+                string screenshotPath = CommonMethods.TakeScreenShot();
+                Console.WriteLine($"Screenshot saved at: {screenshotPath}");
                 Products_AssistantMethods.AddToCart();
             }
             catch (Exception ex)
             {
-                Console.WriteLine( "The issue is : "+ex.Message);
+                Console.WriteLine("The issue is : " + ex.Message);
             }
         }
 
@@ -61,14 +53,14 @@ namespace SwagLabs.TestMethods
                 products_POM.ScrollUp();
                 products_POM.CheckCartNumber();
                 string number = products_POM.CheckCartNumber();
-                Console.WriteLine("Actual number on cart "+number);
+                Console.WriteLine("Actual number on cart " + number);
                 Assert.AreEqual("2", number);
                 Console.WriteLine("Add two product test Completed Successfully.");
             }
-            catch (Exception ex) 
-            { 
-                Console.WriteLine(ex.Message); 
-            }  
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
 
         [TestMethod]
@@ -90,5 +82,19 @@ namespace SwagLabs.TestMethods
                 Console.WriteLine(ex.Message);
             }
         }
-    }
+
+        [TestMethod]
+        [Priority(4)]
+        public void LOGOUT()
+        {
+         Logout_AssistantMethods.Logout();
+        }       
+        
+        //[ClassCleanup]
+        //public static void ClassCleanup()
+        //{
+        //    ManageDriver.CloseDriver();
+
+        //}
+    } 
 }

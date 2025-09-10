@@ -11,9 +11,9 @@ namespace SwagLabs.POM
     public class Login_POM
     {
         public IWebDriver webDriver;
-        public Login_POM(IWebDriver driver) // IwebDriver driver = new chromeDriver()
+        public Login_POM(IWebDriver driver) 
         {
-            webDriver = driver; // _webDriver = new chromeDriver()
+            webDriver = driver; 
         }
         By loginUsername = By.XPath("//div/form/input[@id='user-name']");
         By loginPassword = By.XPath("//div/form/input[@id='password']");
