@@ -88,6 +88,9 @@ namespace SwagLabs.TestMethods
         public void LOGOUT()
         {
          Logout_AssistantMethods.Logout();
+            var expectedURL = "https://www.saucedemo.com/";
+            var actualUrl = ManageDriver.driver.Url;
+            Assert.AreEqual(expectedURL, actualUrl);
         }       
         
         //[ClassCleanup]
